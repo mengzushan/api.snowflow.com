@@ -58,6 +58,21 @@ public class UserDao {
         }
     }
 
+    // 更新用户信息
+    public Errors UserUpdateInfo(CustomShow cs) {
+        UserInfoDao dao = this.DbDriver.create(UserInfoDao.class);
+        // 查找用户是否存在
+        CustomShow cs2 = dao.findByUserId(cs.getCid());
+        if (cs2 != null) {
+            cs2.setUserSex(cs.getUserSex());
+            cs2.setUserAge(cs.getUserAge());
+            dao.update(cs2);
+            return ErrorDefine.Ok;
+        } else {
+            return ErrorDefine.ErrUserNotFound;
+        }
+    }
+
     @DB(table = Custom.DB_NAME)
     interface LoginDao extends CrudDao<Custom,String> {
 
@@ -78,6 +93,9 @@ public class UserDao {
     interface UserInfoDao extends CrudDao<CustomShow,String> {
 
         @SQL("select Cname, from #table where Cname = :1")
-        Custom findByUserName(String userName);
+        CustomShow findByUserName(String userName);
+
+        @SQL("select Cid, form #table where Cid = :1")
+        CustomShow findByUserId(String uid);
     }
 }

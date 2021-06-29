@@ -13,6 +13,9 @@ public class UserSign {
     @SerializedName("user_vc")
     private String userVc;
 
+    @SerializedName("save_sign")
+    private boolean saveSign;
+
     public String getUserName() {
         return userName;
     }
@@ -35,5 +38,13 @@ public class UserSign {
 
     public void setUserVc(String userVc) {
         this.userVc = userVc;
+    }
+
+    public boolean getSaveSign() {
+        return saveSign;
+    }
+
+    public void setSaveSign(boolean saveSign) {
+        this.saveSign = saveSign;
     }
 }

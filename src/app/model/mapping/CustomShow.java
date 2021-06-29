@@ -20,8 +20,21 @@ public class CustomShow extends Custom{
     @Column("Cmoney")
     private double cMoney;
 
+    // 用户的手机号码
     @Column("Cphone")
     private String cPhone;
+
+    // 用户的邮箱
+    @Column("user_email")
+    private String userEmail;
+
+    // 用户的性别
+    @Column("user_sex")
+    private String userSex;
+
+    // 用户的年龄
+    @Column("user_age")
+    private int userAge;
 
     public String getcName() {
         return cName;
@@ -63,4 +76,27 @@ public class CustomShow extends Custom{
         this.cPhone = cPhone;
     }
 
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public String getUserSex() {
+        return userSex;
+    }
+
+    public void setUserSex(String userSex) {
+        this.userSex = userSex;
+    }
+
+    public int getUserAge() {
+        return userAge;
+    }
+
+    public void setUserAge(int userAge) {
+        this.userAge = userAge;
+    }
 }
