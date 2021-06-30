@@ -17,11 +17,16 @@ public class ErrorDefine {
     public static final Errors ErrUsernameValidation = new Errors(HttpURLConnection.HTTP_BAD_REQUEST,200105,"用户名不合法");
     public static final Errors ErrPasswordValidation = new Errors(HttpURLConnection.HTTP_BAD_REQUEST,200106,"密码不合法");
     public static final Errors ErrUserSignNotFound = new Errors(HttpURLConnection.HTTP_BAD_REQUEST,200107,"该用户未登录");
-
+    public static final Errors ErrUserTokenNotFound = new Errors(HttpURLConnection.HTTP_BAD_REQUEST,200108,"用户Token不存在");
+    public static final Errors ErrUserTokenIsFalse = new Errors(HttpURLConnection.HTTP_BAD_REQUEST,200108,"用户Token不正确");
     // 客户端错误
     public static final Errors ErrCookieNotFound = new Errors(HttpURLConnection.HTTP_BAD_REQUEST,200201,"客户端ID不存在");
     public static final Errors ErrVerification = new Errors(HttpURLConnection.HTTP_BAD_REQUEST,200202,"验证码不正确");
     // 运行时库错误
     public static final Errors ErrJsonSyntaxError = new Errors(HttpURLConnection.HTTP_BAD_REQUEST,300101,"Json语法错误");
+    public static final Errors ErrJwtTokenCreate = new Errors(HttpURLConnection.HTTP_INTERNAL_ERROR,300102,"Token生成失败");
+
+    // 应用程序错误
+    public static final Errors ErrDateBaseUpdate = new Errors(HttpURLConnection.HTTP_INTERNAL_ERROR,300201,"数据库发生错误，更新失败");
 }
 

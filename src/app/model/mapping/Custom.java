@@ -26,6 +26,10 @@ public class Custom {
     @Column("Cname")
     private String cName;
 
+    // 用户的签名Token
+    @Column("user_token")
+    private String cToken;
+
     public String getCid() {
         return cid;
     }
@@ -72,5 +76,13 @@ public class Custom {
 
     public void setcName(String cName) {
         this.cName = cName;
+    }
+
+    public String getcToken() {
+        return cToken;
+    }
+
+    public void setcToken(String cToken) {
+        this.cToken = cToken;
     }
 }

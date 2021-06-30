@@ -3,7 +3,6 @@ package common.bindJsonClass;
 
 // 客户端签名验证码参数
 public class CookieVerification {
-    public static final String token = "0xf489531845dddfxx00";
 
     private String time;
     private String cipherText;

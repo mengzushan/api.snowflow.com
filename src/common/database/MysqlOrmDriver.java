@@ -9,7 +9,7 @@ public class MysqlOrmDriver {
 
     public static Mango getCrudConnection() {
         String driverClassName = "com.mysql.jdbc.Driver";
-        String url = "jdbc:mysql://10.190.63.74:3306/bank";
+        String url = "jdbc:mysql://10.190.51.203:3306/bank";
         String username = "bank";
         String password = "Cok774..";
         DataSource ds = new DriverManagerDataSource(driverClassName,url,username,password);

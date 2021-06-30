@@ -117,4 +117,9 @@ public class Utils {
         rt[1] = Base64.getEncoder().encodeToString(bs.toByteArray());
         return rt;
     }
+
+    // TODO:获得一个随机的用户token
+    public static String getUserToken() {
+        return "";
+    }
 }

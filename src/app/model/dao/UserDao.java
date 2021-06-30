@@ -9,7 +9,6 @@ import org.jfaster.mango.annotation.DB;
 import org.jfaster.mango.annotation.SQL;
 import org.jfaster.mango.crud.CrudDao;
 import org.jfaster.mango.operator.Mango;
-import org.jfaster.mango.page.Order;
 
 // 用户实例的增删改查
 public class UserDao {
@@ -73,11 +72,66 @@ public class UserDao {
         }
     }
 
+    // 用户登录查询
+    // [0]为错误类型
+    // [1]为查询的数据
+    public Object[] UserSign(String userName,String password) {
+        LoginDao dao = this.DbDriver.create(LoginDao.class);
+        Custom c = dao.findByUserNameAndCpassword(userName, password);
+        // 用户存在且密码正确则登录成功
+        Object[] o = new Object[2];
+        if (c != null) {
+            o[0] = ErrorDefine.Ok;
+            o[1] = c;
+        } else {
+            o[0] = ErrorDefine.ErrUserNotFoundOrPasswordIncorrect;
+            o[1] = null;
+        }
+        return o;
+    }
+
+    // 根据Id查询用户的Token
+    // [0]为错误类型
+    // [1]为String类型的Token
+    public Object[] searchUserToken(String uid) {
+        LoginDao dao = this.DbDriver.create(LoginDao.class);
+        Custom c = dao.findByUserId(uid);
+        Object[] o = new Object[2];
+        if (c != null) {
+            o[0] = ErrorDefine.Ok;
+            o[1] = c.getcToken();
+        } else {
+            o[0] = ErrorDefine.ErrUserNotFoundOrPasswordIncorrect;
+            o[1] = null;
+        }
+        return o;
+    }
+
+    // 更新用户的Token
+    public Errors updateUserToken(String uid,String token) {
+        LoginDao dao = this.DbDriver.create(LoginDao.class);
+        Custom c = dao.findByUserId(uid);
+        if (c != null) {
+            c.setcToken(token);
+            int num = dao.update(c);
+            // 未发生更改的情况
+            if (num == 0) {
+                return ErrorDefine.ErrDateBaseUpdate;
+            }
+            return ErrorDefine.Ok;
+        } else {
+            return ErrorDefine.ErrUserNotFound;
+        }
+    }
+
     @DB(table = Custom.DB_NAME)
     interface LoginDao extends CrudDao<Custom,String> {
 
         @SQL("select Cid, Cpassword from #table where Cid = :1 and Cpassword = :2")
         Custom findByCidAndCpassword(String cid,String cPassword);
+
+        @SQL("select Cname, Cpassword from #table where Cid = :1 and Cpassword = :2")
+        Custom findByUserNameAndCpassword(String userName,String cPassword);
 
         @SQL("delete from #table where Cid = :1")
         int deleteByCid(String cid);
@@ -87,6 +141,7 @@ public class UserDao {
 
         @SQL("select Cid from #table where Cid = :1")
         Custom findByUserId(String uid);
+
     }
 
     @DB(table = CustomShow.DB_NAME)

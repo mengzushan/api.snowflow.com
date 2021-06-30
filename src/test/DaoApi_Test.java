@@ -1,8 +1,7 @@
 package test;
 
-import common.database.MysqlOrmDriver;
 import app.model.dao.UserDao;
-import app.model.mapping.*;
+import app.model.mapping.Custom;
 import common.errors.Errors;
 import org.junit.Test;
 

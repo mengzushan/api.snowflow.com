@@ -1,6 +1,7 @@
 package app.controller;
 
 import common.Json;
+import common.auth.TokenElement;
 import common.bindJsonClass.BaseReturn;
 import common.bindJsonClass.CookieVerification;
 import common.bindJsonClass.VerificationCodeReturn;
@@ -72,7 +73,7 @@ public class Verification extends HttpServlet {
             try {
                 // 生成验证码及其图片
                 obj = Utils.createVCInstance();
-                cipherText = Utils.createDigitalSignature(cookie_value,dateStr,(String) obj[0],CookieVerification.token);
+                cipherText = Utils.createDigitalSignature(cookie_value,dateStr,(String) obj[0], TokenElement.VerificationCodeToken);
             } catch (NoSuchAlgorithmException e) {
                 e.printStackTrace();
             }
@@ -117,7 +118,7 @@ public class Verification extends HttpServlet {
             String str = new String(src, StandardCharsets.UTF_8);
             Json json = new Json();
             CookieVerification cv = json.writeCookieVerification(str);
-            return Utils.matchDigitalSignature(clientId,cv.getTime(),code,CookieVerification.token,cv.getCipherText());
+            return Utils.matchDigitalSignature(clientId,cv.getTime(),code,TokenElement.VerificationCodeToken,cv.getCipherText());
         } else {
             return false;
         }
